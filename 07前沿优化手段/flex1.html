@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            background-color: grey;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="main"></div>
+<script>
+    window.addEventListener('load',() => {
+        const main = document.querySelector('#main')
+
+        for(let i = 0; i != 10000;++ i) {
+            const child = document.createElement('div')
+            child.className = 'box'
+            child.innerText = `first ${ i }`
+            main.appendChild(child)
+        }
+    })
+</script>
+</body>
+</html>

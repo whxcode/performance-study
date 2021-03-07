@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .rect {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 200px;
+            left: 200px;
+        }
+        .point {
+            position: absolute;
+            width: 5px;
+            cursor: pointer;
+            height: 5px;
+            border: 1px solid black;;
+        }
+        .top-left {
+            left: 0;
+            top: 0;
+            transform: translate(-50%,-50%);
+        }
+        .top-right {
+            right: 0;
+            top: 0;
+            transform: translate(50%,-50%);
+        }
+
+        .bottom-left {
+            left: 0;
+            bottom: 0;
+            transform: translate(-50%,50%);
+        }
+        .bottom-right {
+            right: 0;
+            bottom: 0;
+
+            transform: translate(50%,50%);
+        }
+    </style>
+</head>
+<body>
+<div class="rect resize">
+    <span class="point top-left" data-type="1"></span>
+    <span class="point top-right" data-type="2"></span>
+    <span class="point bottom-left" data-type="3"></span>
+    <span class="point bottom-right" data-type="4"></span>
+</div>
+<script>
+    const rect = document.querySelector('.rect')
+    function onClick(e) {
+        const { target } = e
+        const width = target.offsetWidth
+        const height = target.offsetHeight
+        const offsetTop = e.offsetY
+        const offsetLeft = e.offsetX
+        const maxX = window.innerWidth  - width
+        const maxY = window.innerHeight- height
+        e.stopPropagation()
+        e.cancelBubble = true
+        window.onmousemove = (e) => {
+            let { clientX: x, clientY: y } = e
+           x -= offsetLeft
+           y -= offsetTop
+            x = x < 0 ? 0 : x
+            x = x > maxX ? maxX : x
+
+            y = y < 0 ? 0 : y
+            y = y > maxY ? maxY : y
+
+            target.style.top =  (y ) + 'px'
+            target.style.left =  (x) + 'px'
+            e.preventDefault()
+            e.stopPropagation()
+            e.cancelBubble = true
+        }
+    }
+    rect.addEventListener('mousedown',onClick)
+    rect.addEventListener('mouseup',function() {
+        window.onmousemove = null
+    })
+    const pointers = Array.from(document.querySelectorAll('.point'))
+    function pointOnDown(e) {
+        const { clientWidth,clientHeight,offsetTop,offsetLeft } = rect
+        e.stopPropagation()
+        const type = +e.target.getAttribute('data-type')
+        window.onmousemove = (e) => {
+            const { x,y } = e
+            let width = 0
+            let height = 0
+            switch (type) {
+                case 4:
+                    width = x - offsetLeft
+                    height = y - offsetTop
+                    break
+                case 2:
+                    width = clientWidth - ( clientWidth - ((x - offsetLeft)) )
+                    height =(  clientHeight - (y - offsetTop))
+                    if(height > 20) {
+                        rect.style.top = (offsetTop +  (clientHeight - height) ) + 'px'
+                    }
+                    // rect.style.left = (offsetLeft +  (clientWidth + width) ) + 'px'
+                    break
+                case 1:
+                    width = ( clientWidth - (x - offsetLeft))
+                    height = ( clientHeight - (y - offsetTop))
+                    if(width > 20) {
+                        rect.style.left = (offsetLeft +  (clientWidth - width) ) + 'px'
+                    }
+                    if(height > 20) {
+
+                        rect.style.top = (offsetTop +  (clientHeight - height) ) + 'px'
+                    }
+                    break
+                case 3:
+                   width = ( clientWidth - (x - offsetLeft))
+                   height = y - offsetTop
+
+                    if(width > 20) {
+
+                        rect.style.left = (offsetLeft +  (clientWidth - width) ) + 'px'
+                    }
+
+            }
+            width = width < 20 ? 20 : width
+            height = height < 20 ? 20 : height
+            rect.style.width = width + 'px'
+            rect.style.height = height + 'px'
+        }
+    }
+    function pointOnUp() {
+        window.onmousemove = null
+    }
+    for(const point of pointers) {
+        point.addEventListener('mousedown',pointOnDown)
+        point.addEventListener('mouseup',pointOnUp)
+    }
+</script>
+</body>
+</html>

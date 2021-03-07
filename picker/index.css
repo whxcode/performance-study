@@ -1,0 +1,85 @@
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+.picker {
+    height: 40px;
+    border-radius: 2px;
+    font-size: 14px;
+    border: 1px solid #eee;
+    position: relative;
+}
+.content {
+    border: 1px solid #eee;
+    background: #fff;
+    position: absolute;
+    top: 30px;
+    display: block;
+    border-top: none;
+    left: -1px;
+    cursor: pointer;
+    padding-left: 12px;
+    max-height: 200px;
+    overflow-y: scroll;
+    border-radius: 2px;;
+    width: calc(100% + 2px);
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.picker:hover {
+    border-color: #aaa;
+}
+.picker:hover .content{
+    border-color: #aaa;
+}
+.picker .option {
+    height: 100%;
+    padding: 10px 0 5px;
+    display: flex;
+    align-items: center;
+}
+.not-data {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #666;
+}
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-top: 10px solid #666;
+    border-left:5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.hold {
+    text-indent: 12px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+.active {
+    color: red;
+}
+.wrapper {
+    margin: 100px auto ;
+
+    width: 300px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="main"></div>
+    <img src="./me0.jpg" alt="">
+    <img src="./me0.jpg" alt="">
+    <img src="./me0.jpg" alt="">
+    <img src="./me0.jpg" alt="">
+    <img src="./me0.jpg" alt="">
+    <img src="./me0.jpg" alt="">
+    <script>
+        let i = 0
+        function counter(timestamp) {
+            let i = 0
+            while (i ++ <= 1000000) { ;; }
+        }
+        let ticking = false
+        window.addEventListener('pointermove',() => {
+        /*    if(ticking) {
+                return
+            }
+            ticking = true
+            window.requestAnimationFrame(() => {
+               // counter()
+                ticking = false
+            })*/
+            console.log(i ++)
+        })
+
+        // window.requestAnimationFrame(e => {
+           // console.log(e)
+        // })
+    /*    const update = (timestamp) => {
+            const cards = document.querySelectorAll('img')
+            for(const card of cards) {
+                card.style.width = ((Math.sin(card.offsetTop +
+                    (timestamp / 1000) + 1
+                )) * 500 ) + 'px'
+            }
+            // cards[0].style.width = '800px'
+
+            window.requestAnimationFrame(update)
+        }
+        const f1 = () => {
+            let i = 0
+            while (i ++ <= 10000) {
+                console.log(i)
+            }
+        }
+        window.addEventListener('load',() => {
+            f1()
+            window.requestAnimationFrame(update)
+        })*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+</head>
+<body>
+<div>
+    <p id="parEle">我是父元素
+        <span id="sonEle">我是子元素
+            <i id="i">iii</i>
+        </span>
+
+    </p>
+</div>
+</body>
+</html>
+<script>
+    const array = [1,2]
+    const d = array.reduce((a,b) => {
+        return b
+    },{})
+    console.log(d)
+</script>
+<script type="text/javascript">
+    var sonEle = document.getElementById('sonEle');
+    var parEle = document.getElementById('parEle');
+
+
+    parEle.addEventListener('click', function () {
+        console.log('parent')
+    }, true);
+    // 自己是走的事件捕获 触发孩子节点先回捕获到这儿然后在执行子节点逻辑，然后在冒泡给父级元素
+    sonEle.addEventListener('click', function () {
+        console.log('child')
+    }, true);
+
+    i.addEventListener('click', function () {
+        console.log('i')
+    }, false);
+
+
+ /*   sonEle.addEventListener('click', function () {
+        alert('子级冒泡');
+    }, false);
+    sonEle.addEventListener('click', function () {
+        alert('子级捕获');
+    }, true);*/
+
+</script>
